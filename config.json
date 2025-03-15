@@ -1,0 +1,14 @@
+{
+  "announceUrl" : "https://v3bl.goszakup.gov.kz/ru/announce/index/123456",
+  "portalPassword" : "123456!",
+  "ecpPassword" : "123456",
+  "ecpAbsPath" : "C:\\Users\\User01\\Documents\\ecp\\folder01\\GOST512_123456789123456789.p12",
+  "subjectAddressId" : "",
+  "iikId" : "",
+  "phoneNumber" : "",
+  "legalEntity" : false,
+  "productAnno" : false,
+  "subLotsType" : false,
+  "parallelAppsConfig" : { },
+  "ipAddresses" : [ ]
+}
