@@ -1,0 +1,41 @@
+<configuration>
+
+    <property file="logback.properties"/>
+    <property name="LOG_FILE" value="logs/app.log" />
+    <property name="APP_NAME" value="HTTP-GZ-FOOD-DOG" />
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_FILE}</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} [%X{APP_NAME}] [%thread] %-5level --- %logger{36} : %msg%n</pattern>
+            <immediateFlush>true</immediateFlush>
+        </encoder>
+    </appender>
+
+    <!-- Асинхронный логгер для файлового вывода -->
+    <appender name="ASYNC_FILE" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>128</queueSize>  <!-- Размер очереди -->
+        <discardingThreshold>0</discardingThreshold>  <!-- Никогда не отбрасывать логи -->
+        <appender-ref ref="FILE"/> <!-- Отправляем логи в FILE -->
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>${log.level.stdout}</level>
+        </filter>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} [%X{APP_NAME}] [%-15thread] %highlight(%-5level) --- %-40logger{36} : %msg%n</pattern>
+            <immediateFlush>true</immediateFlush>
+        </encoder>
+    </appender>
+
+    <contextName>${APP_NAME}</contextName>
+
+    <!-- Root управляет общим уровнем -->
+    <root level="${log.level.root}">
+        <appender-ref ref="ASYNC_FILE"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>
